@@ -58,43 +58,8 @@ scoring_ood <- score4cast::crps_logs_score(
 scoring_ood_mean = aggregate(crps ~ variable, data = scoring_ood, FUN = mean, na.rm = FALSE)
 report_ood <- setNames(as.list(scoring_ood_mean$crps), paste0("out_of_domain_", scoring_ood_mean$variable))
 
-report <- c(report_id, report_ood)
+report <- c(report_id, report_ood) #combine two dictionaries
+
+# Write the reporting results to a JSON file
 output_file <- file.path(output_dir, "scores.json")
 write_json(report, output_file, auto_unbox = TRUE)
-############################
-# sol_id_df <- subset(sol_id_df, select = -c(eventID, domainID, domain))
-# pred_id_df <- subset(pred_id_df, select = -eventID)
-
-# mock target dataframe
-# for site BART
-# for three dates
-# for SPEI_1y variable
-
-# target_spei_1y <- data.frame(
-#   site_id = "BART",
-#   datetime = as.Date(c(
-#     "2018-05-02", "2018-05-30", "2018-06-13")), 
-#   variable = "SPEI_1y",
-#   observation = c(1.38, 0.710, 0.484),
-#   stringsAsFactors = FALSE)
-
-# set.seed(42)
-# # mock predictions
-# # 10 ensemble members for each date
-# # null model using rnorm to generate predictions
-
-# prediction_ensemble_spei_1y <- data.frame(
-#   site_id = "BART",
-#   datetime = rep(
-#     as.Date(c(
-#     "2018-05-02", "2018-05-30", "2018-06-13")), each = 10), 
-#   parameter = rep(1:10, 3),
-#   # family = "ensemble",
-#   # model_id = "my_test_model",
-#   variable = "SPEI_1y",
-#   prediction = rnorm(30, mean = 1.5, sd = 1),
-#   stringsAsFactors = FALSE)
-
-# print(prediction_ensemble_spei_1y)
-
-
