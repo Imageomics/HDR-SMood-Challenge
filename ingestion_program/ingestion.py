@@ -138,7 +138,7 @@ if __name__ == "__main__":
     grouped_metadata = metadata.groupby('eventID')
     with open(os.path.join(output_dir, "predictions.csv"), mode='w', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow(["eventID","variable","prediction","parameter"])
+        writer.writerow(["eventID","variable","parameter","prediction"])
         start = time.time()
         for event_id, group in tqdm(grouped_metadata, total=len(grouped_metadata)):
             event = []
