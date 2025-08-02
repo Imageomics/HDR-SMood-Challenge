@@ -1,16 +1,18 @@
-# Butterfly Hybrid Detection: Data
+# Beetles as Sentinel Taxa: Data
 
-This challenge uses data compiled from various [Zenodo records of the Butterfly Genetics Group at University of Cambridge](https://zenodo.org/communities/butterfly/records?q=&f=subject%3ACambridge&l=list&p=1&s=10&sort=newest). All data is licensed under [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/); see [butterfly_anomaly.bib](https://github.com/Imageomics/HDR-anomaly-challenge/blob/main/butterfly_anomaly.bib) for full citations.
+This challenge uses data collected by the National Ecological Observatory Network (NEON) for the "Ground beetles sampled from pitfall traps" data product ([DP1.10022.001](https://data.neonscience.org/data-products/DP1.10022.001)). All data are licensed under <<NEON license info>>; see <<NEON citation for data product>> for full citations.
 
 ## Instructions to Download Training Data
+
+<<needs updating for beetle ml process, once we have it developed>>
 
 First, install the downloader in your virtual environment:
 ```bash
 pip install git+https://github.com/Imageomics/cautious-robot
 ```
-Then download [`butterfly_anomaly_train.csv`](https://github.com/Imageomics/HDR-anomaly-challenge/blob/main/files/butterfly_anomaly_train.csv) and run: 
+Then download <<link to training data csv>> and run: 
 ```bash
-cautious-robot -i <path/to/butterfly_anomaly_train.csv> -o <path/to/images> -s hybrid_stat -v md5
+cautious-robot -i <path/to/beetle_ml_train.csv> -o <path/to/images> -s hybrid_stat -v md5
 ```
 
 This will create subfolders `hybrid` and `non-hybrid` with images named by the `filename` column (`<CAMID>.jpg`). Remove the `-s hybrid_stat` if you want a flat directory.
