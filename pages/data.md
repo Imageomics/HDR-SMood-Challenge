@@ -1,6 +1,10 @@
 # Beetles as Sentinel Taxa: Data
 
-This challenge uses data collected by the National Ecological Observatory Network (NEON) for the "Ground beetles sampled from pitfall traps" data product ([DP1.10022.001](https://data.neonscience.org/data-products/DP1.10022.001)). All data are licensed under <<NEON license info>>; see <<NEON citation for data product>> for full citations.
+This challenge uses images and metadata associated with carabid beetle specimens collected by the [National Ecological Observatory Network (NEON)](https://www.neonscience.org/) for the "Ground beetles sampled from pitfall traps" data product (DP1.10022.001, [RELEASE-2025](https://doi.org/10.48443/cd21-q875)) to predict drought conditions at the location and time of sampling. 
+
+For this challenge, drought was characterized for each beetle sampling event using values of the Standardized Precipitation Evapotranspiration Index (SPEI) retrieved from the [GRIDMET Drought image collection](https://developers.google.com/earth-engine/datasets/catalog/GRIDMET_DROUGHT#description) (see [Abatzoglou (2011)](https://doi.org/10.1002/joc.3413).
+
+All data are licensed under <<get NEON preferred license infromation from Christine>>.
 
 ## Instructions to Download Training Data
 
@@ -24,7 +28,9 @@ Add downsample flag with desired size if you want to also get the images downsiz
 
 ## Additional Information About the CSV File
 
-Following the above steps, participants will obtain two training image subfolders, one for **hybrid** and one for **non-hybrid**. 
+Following the above steps, participants will obtain a csv metadata file with imageURIs linking to the specimen images.
+
+
 
 The [`butterfly_anomaly_train.csv`](https://github.com/Imageomics/HDR-anomaly-challenge/blob/main/files/butterfly_anomaly_train.csv) offers additional biologically meaningful information for each image, which may be useful for developing the anomaly (i.e., hybrid) detection algorithm.
 
