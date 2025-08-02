@@ -3,15 +3,26 @@ This challenge is an out-of-sample prediction challenge. The goal is to predict 
 
 This challenge will provide insight about how well carabid beetles can serve as an indicator taxa to understand local drought conditions. This challenge will help ecologists better understand how inter- and intra-specific variation in carabid traits correspond with local environmental conditions, and over what time scales. We expect trait variations among specimens can be detected in the imagery and linked to drought metrics using AI/ML models. If these models perform better than benchmark models (e.g., historical mean drought condition at a site for the given day-of-year, or models using only metadata), it suggests there is ecologically relevant information that can be extracted from specimen images and linked to environmental data. 
 
+**What to predict:** The Standardized Precipitation Evapotranspiration Index (SPEI) metric represents cumulative drought conditions over a time window. For this challenge, participants will submit predictions for SPEI metrics for specific sampling events, where the SPEI values were calculated using three different time windows preceeding the sampleing event to represent three different temporal scales over which different types of ecological processes may be affected: 
+- `spei_30d` is drought conditions calcualted from data for the 30 day window preceding sample collection
+- `spei_1y` is the drought condition calculated from the year preceding sample collection
+- `spei_2y` is the drought condition calculated from the two years preceding sample collection
+
+**The submission file** will be a long-format flat table (csv file format) with a prediction for each `spei_30d`, `spei_1y`, and `spei_2y` for each `event_id`. Predictions will include a measure of uncertainty, so each prediction will include `mu` (mean) and `sigma` (standard devation). See the example submissoin below for more details. 
+
 ## The Test Dataset
 This test data set comprises:
 - An image collection of carabid beelte specimens.
 - A metadata table
 
-The goal of the challenge is to use a collection of images of carabid beetles collected during a sampling event (specimens collected at a given location on a given date) to predict the drought conditions at that site. 
-
-
-
+### Data Fields in the Metadata Table
+| fieldName | description | dataType | relatedTerms |
+|---|---|---|---|
+| event_id | An (anonymized) identifier for the set of information associated with the event, which includes information about the place and time of the event | string | [DWC_v2009-04-24:eventID](http://rs.tdwg.org/dwc/terms/history/index.htm#eventID-2009-04-24)
+| domain_id | Unique identifier of the NEON domain | string | [DWC_v2009-04-24:locationID](http://rs.tdwg.org/dwc/terms/history/index.htm#locationID-2009-04-24)
+| scientific_name | Scientific name, associated with the taxonID. This is the name of the lowest level taxonomic rank that can be determined | string | [DWC_v2009-04-24:scientificName](http://tdwg.github.io/dwc/terms/history/index.htm#scientificName-2009-09-21)
+| image_id | Unique identifier for image | string  | |
+| image_uri | Location of image media resource (link to image) | string | |
 
 ## Evaluation Phases
 There are 2 phases. Each test data set is split into a development set and a final test set.  
