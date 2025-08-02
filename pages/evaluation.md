@@ -1,21 +1,17 @@
-# Butterfly Hybrid Detection: Evaluation
-This challenge is an anomaly detection problem. The goal is to find hybrid butterfly instances. There are two sets of images considered in the test set, as described below.
+# Beetles as Sentinel Taxa: Evaluation
+This challenge is an out-of-sample prediction challenge. The goal is to predict the drought status at a location on a specific date based on images of carabid beetle specimens collected at the location on that date. This will be an out-of-sample challenge because training data will be assembled from one site of locations, and test data will assembled from a different set of locations. All locations will be NEON sites.
 
-## The First Component of the Test Dataset
+This challenge will provide insight about how well carabid beetles can serve as an indicator taxa to understand local drought conditions. This challenge will help ecologists better understand how inter- and intra-specific variation in carabid traits correspond with local environmental conditions, and over what time scales. We expect trait variations among specimens can be detected in the imagery and linked to drought metrics using AI/ML models. If these models perform better than benchmark models (e.g., historical mean drought condition at a site for the given day-of-year, or models using only metadata), it suggests there is ecologically relevant information that can be extracted from specimen images and linked to environmental data. 
+
+## The Test Dataset
 This test data set comprises:
-- An image collection of butterfly **Species A subspecies**. These are non-hybrid instances.
-- An image collection of **Species A hybrids**, which are from parents from different subspecies of Species A. Note that in the training data, we only provide one type of hybrid (the "signal" hybrid), from one specific combination of parents. In the test data, there are also "non-signal" hybrids, which are from other combinations of parents. 
+- An image collection of carabid beelte specimens.
+- A metadata table
 
-The goal of the challenge is to elicit new ways of solving this problem through designing a model to distinguish between non-hybrid instances and hybrid instances.
+The goal of the challenge is to use a collection of images of carabid beetles collected during a sampling event (specimens collected at a given location on a given date) to predict the drought conditions at that site. 
 
-## The Second Component of the Test Dataset
-Moreover, Species A has a [mimic](https://en.wikipedia.org/wiki/M%C3%BCllerian_mimicry) Species B. These two butterfly species have quite similar appearances to evade predators. Specifically, for the two subspecies of Species A that produce the signal hybrid, there are mimic subspecies of Species B which also hybridize. We thus provide a separate, second test data set that contains:
-- An image collection of butterfly **Species B subspecies**. These are non-hybrid instances.
-- An image collection of **Species B hybrids**, which are from parents from different subspecies of Species B. 
 
-Specifically, we only consider one particular hybrid and two specific parent subspecies of Species B, corresponding to Species A signal hybrid and its two parent subspecies. 
 
-This second test set aims to investigate whether the submitted anomaly detection algorithm for butterfly Species A is transferrable to the mimic butterfly Species B.
 
 ## Evaluation Phases
 There are 2 phases. Each test data set is split into a development set and a final test set.  
@@ -37,7 +33,9 @@ There are 2 phases. Each test data set is split into a development set and a fin
 
 This competition allows you to submit your developed algorithm, which will be run on the development and the final test dataset through CodaBench.
 
-Your algorithm needs to generate an anomaly score for each input image: the higher the score is, the more likely the input image is an anomaly (i.e., hybrid).
+Your algorithm needs to generate three SPEI predictions for each `event_id`, where each `event_id` will have a collection of several images of carabid beetle specimens that were collected at that location on that date: 
+
+Each prediction will be scored using the Continuous Rank Probability Score (CRPS)
 
 The submissions are evaluated based on two metrics:
 - The true positive rate (TPR) at the true negative rate (TNR) = 95%: the recall of hybrid cases, with a score threshold set to recognizing non-hybrid cases with 95% accuracy.
