@@ -1,22 +1,15 @@
-# Butterfly Hybrid Detection
-### Brought to you by Imageomics Institute as part of the 2024 HDR Anomaly ML Challenge
+# Beetles as Sentinel Taxa: Predicting drought conditions from NEON specimen imagery
+### Brought to you by Imageomics Institute as part of the 2025 HDR ML Challenge
 
 
 ## Introduction 
 
-### Butterfly hybrids
-Populations of butterfly species that become separated in some way, such as geographic or habitat separation, can develop into different subspecies. The visual appearances (e.g., color patterns on the wings) of these subspecies can be drastically different.
+Climate change is increasing the frequency and severity of drought events globally, posing significant threats to ecosystems, agriculture, water resources, and human societies ([IPCC, 2022](https://www.ipcc.ch/report/ar6/wg2/)). Effective monitoring and prediction of drought conditions are crucial for mitigation and adaptation strategies. While traditional drought monitoring relies on meteorological and hydrological data, ecological indicators can provide complementary insights into ecologically significant on-the-ground impacts of water stress.
 
-Normally, only individuals of the same subspecies mate and produce offspring. Occasionally, where the ranges of subspecies come into contact or overlap, individuals from different subspecies can mate, and produce offspring considered **hybrids**. The visual appearances of hybrids are _partially_ similar to _each_ of their parents.
+Insects, particularly ground beetles (Coleoptera: Carabidae), are well-established bioindicators due to their sensitivity to environmental changes (including moisture availability), high diversity, and relative ease of sampling ([Lövei and Sunderland 1996](https://doi.org/10.1146/annurev.en.41.010196.001311); [Rainio & Niemelä, 2003](https://doi.org/10.1023/A:1022412617568)). This widespread beetle family has been used to evaluate changes in landscape and local environmental conditions following natural and anthropogenic disturbances, including climate change ([Muller-Kroehling et al. 2014](https://www.zobodat.at/pdf/Angewandte-Carabidologie_10_0097-0100.pdf); [Qiu et al. 2023](https://doi.org/10.1111/geb.13670)) and drought (Weiss et al. 2024a,b). While responses to these disturbances can be captured by changes in their abundance and composition, morphological and ecological traits are increasingly used to characterize communities because they give insight into why species respond to change ([Cadotte et al. 2015](https://doi.org/10.1016/j.tree.2015.07.001); [Fountain-Jones et al. 2015](https://doi.org/10.1111/een.12158); [Moretti et al. 2017](https://doi.org/10.1111/1365-2435.12776)).
 
-In this challenge, offspring produced by the same-subspecies parents (i.e., **non-hybrids**) are treated as **normal** cases because they are far more frequently observed. In contrast, **hybrids** are treated as **anomaly** cases, not only because they are much less frequently observed--with some combinations not yet observed--but also because their visual appearances are much more variant and hardly predictive.
+The National Ecological Observatory Network (NEON) provides unprecedented, standardized ecological data across the United States, including systematic collections of carabid beetles from diverse terrestrial ecosystems ([Thorpe et al., 2016]( https://doi.org/10.1002/ecs2.1627)). These collections, housed in the NEON Biorepository, include high-resolution images of individual specimens. This challenge leverages this unique resource to explore a novel approach to environmental monitoring.
 
-### Butterfly mimicry
-On a different dimension, two different butterfly species with overlapping geographic ranges may visually mimic each other. Such [mimicry](https://en.wikipedia.org/wiki/M%C3%BCllerian_mimicry) could help avoid shared predators, especially if one (or both) species is toxic or not palatable.
-
-Besides the goal to develop an anomaly detection algorithm to distinguish between hybrids and non-hybrids for one species, this challenge aims to investigate whether such an algorithm is generalizable to the other visually mimicking species. 
-
-![subspecies_to_hybrids comparison different subspecies of Species A compared to two of its mimics](https://github.com/user-attachments/assets/8647e1f5-4f99-48c6-8325-fdfd0e5d4c21)
 
 
 ## Setup Overview
