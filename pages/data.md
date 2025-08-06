@@ -11,7 +11,7 @@ All data are licensed under <<get NEON preferred license infromation from Christ
 **Model inputs** will be a flat metadata table (csv format) where each row is a metadata record for a specimen image. Multiple images will be associated with a sampling `event_id`, where a "sampleing event" corresponds with a location (NEON Site ID) and the date on which the beetle specimens were collected. Thus, multiple input records (multiple images of beetle specimens) will be used to predict a single SPEI value at a given site on a given date. Note that `event_id`s will be anonymized in the test dataset, but the metadata will include `site_id` and `collect_date` in the training data. 
 
 **What to predict:** The SPEI metrics represent cumulative drought conditions over a time window. For this challenge, participants will submit predictions for SPEI metrics representing three different time scales: 
-- `spei_30d` is drought conditions calcualted from data for the 30 day window preceding sample collection
+- `spei_30d` is drought conditions calculated from data for the 30 day window preceding sample collection
 - `spei_1y` is the drought condition calculated from the year preceding sample collection
 - `spei_2y` is the drought condition calculated from the two years preceding sample collection
 
