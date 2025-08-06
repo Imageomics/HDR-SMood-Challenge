@@ -15,7 +15,7 @@ All data are licensed under <<get NEON preferred license infromation from Christ
 - `spei_1y` is the drought condition calculated from the year preceding sample collection
 - `spei_2y` is the drought condition calculated from the two years preceding sample collection
 
-**The submission file** will be a long-format flat table (csv file format) with a prediction for each `spei_30d`, `spei_1y`, and `spei_2y` for each `event_id`. Predictions will include a measure of uncertainty, so each prediction will include `mu` (mean) and `sigma` (standard devation). See the example submissoin below for more details. 
+**The submission file** will be a long-format flat table (csv file format) with a prediction for each `spei_30d`, `spei_1y`, and `spei_2y` for each `event_id`. Predictions will include a measure of uncertainty, so each prediction will include `mu` (mean) and `sigma` (standard deviation). See the example submission below for more details. 
 
 ## Instructions to Download Training Data
 
