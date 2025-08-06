@@ -34,13 +34,12 @@ sol_id_df <- sol_df[sol_df$domain == "True", ]
 
 # filter pred_df for in-domain (ID) data
 pred_id_df <- pred_df[pred_df$eventID %in% sol_id_df$eventID, ]
-# print(pred_id_df)
 
 # calculating crps scoring summary using score4cast package
 scoring_id <- score4cast::crps_logs_score(
   target = sol_id_df,
   forecast = pred_id_df)
-# print scoring summary
+
 # print(scoring_id)
 
 # Avg across event
@@ -54,11 +53,16 @@ pred_ood_df <- pred_df[pred_df$eventID %in% sol_ood_df$eventID, ]
 scoring_ood <- score4cast::crps_logs_score(
   target = sol_ood_df,
   forecast = pred_ood_df)
-# print(scoring_ood)
 scoring_ood_mean = aggregate(crps ~ variable, data = scoring_ood, FUN = mean, na.rm = FALSE)
 report_ood <- setNames(as.list(scoring_ood_mean$crps), paste0("out_of_domain_", scoring_ood_mean$variable))
 
 report <- c(report_id, report_ood) #combine two dictionaries
+# Root-Mean-Square aggregation (no normalisation)
+rms <- sqrt(mean(unlist(report)^2))
+# Append the headline score to the same list
+report$rms <- rms
+
+print(report)
 
 # Write the reporting results to a JSON file
 output_file <- file.path(output_dir, "scores.json")
