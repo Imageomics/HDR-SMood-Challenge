@@ -12,7 +12,7 @@ This challenge will provide insight about how well carabid beetles can serve as 
 
 ## The Test Dataset
 This test data set comprises:
-- An image collection of carabid beelte specimens.
+- An image collection of carabid beetle specimens.
 - A metadata table
 
 ### Data Fields in the Metadata Table
