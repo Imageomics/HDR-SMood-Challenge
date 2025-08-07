@@ -4,7 +4,7 @@ This challenge uses images and metadata associated with [carabid beetle](https:/
 
 For this challenge, drought was characterized for each beetle sampling event using values of the Standardized Precipitation Evapotranspiration Index (SPEI) retrieved from the [GRIDMET Drought image collection](https://developers.google.com/earth-engine/datasets/catalog/GRIDMET_DROUGHT#description) (see [Abatzoglou (2011)](https://doi.org/10.1002/joc.3413).
 
-All data are licensed under <<get NEON preferred license infromation from Christine>>.
+All data are licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
 ## General Overview of Inputs and Expected Outputs
 
