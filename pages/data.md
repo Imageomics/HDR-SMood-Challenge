@@ -8,14 +8,14 @@ All data are licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/
 
 ## General Overview of Inputs and Expected Outputs
 
-**Model inputs** will be a flat metadata table (csv format) where each row is a metadata record for a specimen image. Multiple images will be associated with a sampling `event_id`, where a "sampleing event" corresponds with a location (NEON Site ID) and the date on which the beetle specimens were collected. Thus, multiple input records (multiple images of beetle specimens) will be used to predict a single SPEI value at a given site on a given date. Note that `event_id`s will be anonymized in the test dataset, but the metadata will include `site_id` and `collect_date` in the training data. 
+**Model inputs** will be a flat metadata table (csv format) where each row is a metadata record for a specimen image. Multiple images will be associated with a sampling `eventID`, where a "sampleing event" corresponds with a location (NEON Site ID) and the date on which the beetle specimens were collected. Thus, multiple input records (multiple images of beetle specimens) will be used to predict a single SPEI value at a given site on a given date. Note that `eventID`s will be anonymized in the test dataset, but the metadata will include `siteID` and `collectDate` in the training data. 
 
 **What to predict:** The SPEI metrics represent cumulative drought conditions over a time window. For this challenge, participants will submit predictions for SPEI metrics representing three different time scales: 
-- `spei_30d` is drought conditions calculated from data for the 30 day window preceding sample collection
-- `spei_1y` is the drought condition calculated from the year preceding sample collection
-- `spei_2y` is the drought condition calculated from the two years preceding sample collection
+- `SPEI_30d` is drought conditions calculated from data for the 30 day window preceding sample collection
+- `SPEI_1y` is the drought condition calculated from the year preceding sample collection
+- `SPEI_2y` is the drought condition calculated from the two years preceding sample collection
 
-**The submission file** will be a long-format flat table (csv file format) with a prediction for each `spei_30d`, `spei_1y`, and `spei_2y` for each `event_id`. Predictions will include a measure of uncertainty, so each prediction will include `mu` (mean) and `sigma` (standard deviation). See the example submission below for more details. 
+**The submission file** will be a long-format flat table (csv file format) with a prediction for each `SPEI_30d`, `SPEI_1y`, and `SPEI_2y` for each `eventID`. Predictions will include a measure of uncertainty, so each prediction will include `mu` (mean) and `sigma` (standard deviation). See the example submission below for more details. 
 
 ## Instructions to Download Training Data
 
@@ -38,25 +38,27 @@ This will create subfolders ...
 
 ## Additional Information About the CSV File
 
-Following the above steps, participants will obtain a csv metadata file with `image_uri`s linking to the specimen images. Each record (row) is metadata for a single specimen image. The training dataset will include all the fields described in the schema below. The test dataset will only include `event_id` (anonymized), `domain_id`, `scientific_name`, and `image_uri`.
+Following the above steps, participants will obtain a csv metadata file with `relative_img_loc`s linking to the specimen images. Each record (row) is metadata for a single specimen image. The training dataset will include all the fields described in the schema below. The test dataset will only include `eventID` (anonymized), `domainID` (anonymized), `scientificName`, and `relative_img_loc`.
 
 <<We can update this as appropriate if we are going to add metadata about the image, like image quality flags etc. Also, I'm unclear on whether we're going to provide a download of the image files to participants, or just give them a table with image_uris>>
 
 ### Data Fields
 | fieldName | description | dataType | relatedTerms |
 |---|---|---|---|
-| event_id | An (anonymized) identifier for the set of information associated with the event, which includes information about the place and time of the event | string | [DWC_v2009-04-24:eventID](http://rs.tdwg.org/dwc/terms/history/index.htm#eventID-2009-04-24)
-| collect_date | Date of the collection event | dateTime | [DWC_v2009-04-24:eventDate](http://rs.tdwg.org/dwc/terms/history/index.htm#eventDate-2009-04-24)
-| domain_id | Unique identifier of the NEON domain | string | [DWC_v2009-04-24:locationID](http://rs.tdwg.org/dwc/terms/history/index.htm#locationID-2009-04-24)
-| site_id | NEON site code | string | [DWC_v2009-04-24:locationID](http://rs.tdwg.org/dwc/terms/history/index.htm#locationID-2009-04-24)
-| scientific_name | Scientific name, associated with the taxonID. This is the name of the lowest level taxonomic rank that can be determined | string | [DWC_v2009-04-24:scientificName](http://tdwg.github.io/dwc/terms/history/index.htm#scientificName-2009-09-21)
-| image_id | Unique identifier for image | string  | |
-| image_uri | Location of image media resource (link to image) | string | |
-| spei_30d | Target variable: SPEI calculated over a short timescale (1 month), reflecting short-term moisture conditions. | real | |
-| spei_1y | Target variable: SPEI calculated over a medium timescale (1 year), reflecting seasonal precipitation patterns. | real | |
-| spei_2y | Target variable: SPEI calculated over a long timescale (2 years), reflecting long-term hydrological conditions. | real | |
+| eventID | An (anonymized) identifier for the set of information associated with the event, which includes information about the place and time of the event | string | [DWC_v2009-04-24:eventID](http://rs.tdwg.org/dwc/terms/history/index.htm#eventID-2009-04-24)
+| collectDate | Date of the collection event | dateTime | [DWC_v2009-04-24:eventDate](http://rs.tdwg.org/dwc/terms/history/index.htm#eventDate-2009-04-24)
+| domainID | Unique identifier (anonymized) of the NEON domain | string | [DWC_v2009-04-24:locationID](http://rs.tdwg.org/dwc/terms/history/index.htm#locationID-2009-04-24)
+| siteID | NEON site code | string | [DWC_v2009-04-24:locationID](http://rs.tdwg.org/dwc/terms/history/index.htm#locationID-2009-04-24)
+| scientificName | Scientific name, associated with the taxonID. This is the name of the lowest level taxonomic rank that can be determined | string | [DWC_v2009-04-24:scientificName](http://tdwg.github.io/dwc/terms/history/index.htm#scientificName-2009-09-21)
+| public_id | Unique identifier for image | string  | |
+| relative_img_loc | Beetle image location within the beetle images folder (flattened_images) | string | |
+| colorpicker_path | Color card image location within the color card and scale images folder (color_and_scale_images) | string | |
+| scalebar_path | Scale image location within the color card and scale images folder (color_and_scale_images) | string | |
+| SPEI_30d | Target variable: SPEI calculated over a short timescale (1 month), reflecting short-term moisture conditions. | real | |
+| SPEI_1y | Target variable: SPEI calculated over a medium timescale (1 year), reflecting seasonal precipitation patterns. | real | |
+| SPEI_2y | Target variable: SPEI calculated over a long timescale (2 years), reflecting long-term hydrological conditions. | real | |
 
 
 ## Submission Samples
 
-Participants can download sample submissions with the baseline algorithms (`DinoV2` and `BioCLIP` based) from the "Files" tab.
+Participants can download sample submissions with the baseline algorithms (`DinoV2` and `BioCLIPV2` based) from the "Files" tab.
