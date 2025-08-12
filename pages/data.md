@@ -2,24 +2,25 @@
 
 This challenge uses images and metadata associated with [carabid beetle](https://en.wikipedia.org/wiki/Ground_beetle) specimens collected by the [National Ecological Observatory Network (NEON)](https://www.neonscience.org/) for the "Ground beetles sampled from pitfall traps" data product (DP1.10022.001, [RELEASE-2025](https://doi.org/10.48443/cd21-q875)) to predict drought conditions at the location and time of sampling. 
 
-For this challenge, drought was characterized for each beetle sampling event using values of the Standardized Precipitation Evapotranspiration Index (SPEI) retrieved from the [GRIDMET Drought image collection](https://developers.google.com/earth-engine/datasets/catalog/GRIDMET_DROUGHT#description) (see [Abatzoglou (2011)](https://doi.org/10.1002/joc.3413).
+For this challenge, drought was characterized for each beetle sampling event using values of the Standardized Precipitation Evapotranspiration Index (SPEI) retrieved from the [GRIDMET Drought image collection](https://developers.google.com/earth-engine/datasets/catalog/GRIDMET_DROUGHT#description) (see [Abatzoglou (2011)](https://doi.org/10.1002/joc.3413)).
 
-All data are licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+All data are licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
 ## General Overview of Inputs and Expected Outputs
 
-**Model inputs** will be a flat metadata table (csv format) where each row is a metadata record for a specimen image. Multiple images will be associated with a sampling `eventID`, where a "sampleing event" corresponds with a location (NEON Site ID) and the date on which the beetle specimens were collected. Thus, multiple input records (multiple images of beetle specimens) will be used to predict a single SPEI value at a given site on a given date. Note that `eventID`s will be anonymized in the test dataset, but the metadata will include `siteID` and `collectDate` in the training data. 
+**Model inputs** will be a flat metadata table (CSV format) where each row is a metadata record for a specimen image. Multiple images will be associated with a sampling `eventID`, where a "sampling event" corresponds with a location (NEON Site ID) and the date on which the beetle specimens were collected. Thus, multiple input records (multiple images of beetle specimens) will be used to predict a single SPEI value at a given site on a given date. Note that `eventID`s will be anonymized in the test dataset, but the metadata will include `siteID` and `collectDate` in the training data. 
 
 **What to predict:** The SPEI metrics represent cumulative drought conditions over a time window. For this challenge, participants will submit predictions for SPEI metrics representing three different time scales: 
-- `SPEI_30d` is drought conditions calculated from data for the 30 day window preceding sample collection
-- `SPEI_1y` is the drought condition calculated from the year preceding sample collection
-- `SPEI_2y` is the drought condition calculated from the two years preceding sample collection
+- `SPEI_30d` is the drought condition calculated from data for the 30 day window preceding sample collection.
+- `SPEI_1y` is the drought condition calculated from the year preceding sample collection.
+- `SPEI_2y` is the drought condition calculated from the two years preceding sample collection.
 
 **The submission file** will be a long-format flat table (csv file format) with a prediction for each `SPEI_30d`, `SPEI_1y`, and `SPEI_2y` for each `eventID`. Predictions will include a measure of uncertainty, so each prediction will include `mu` (mean) and `sigma` (standard deviation). See the example submission below for more details. 
 
 ## Instructions to Download Training Data
 
-<<needs updating for beetle ml process, once we have it developed>>
+
+The challenge training data is available on Hugging Face, from [imageomics/sentinel-beetles](https://huggingface.co/datasets/imageomics/sentinel-beetles). Please follow the directions provided in the dataset card to access the data, and open a [discussion](https://huggingface.co/datasets/imageomics/sentinel-beetles/discussions) if you encounter any issues. Note that the data will not be made available until the official launch of the challenge.
 
 First, install the downloader in your virtual environment:
 ```bash
@@ -38,9 +39,10 @@ This will create subfolders ...
 
 ## Additional Information About the CSV File
 
-Following the above steps, participants will obtain a csv metadata file with `relative_img_loc`s linking to the specimen images. Each record (row) is metadata for a single specimen image. The training dataset will include all the fields described in the schema below. The test dataset will only include `eventID` (anonymized), `domainID` (anonymized), `scientificName`, and `relative_img_loc`.
+The CSV metadata file (included in the [Hugging Face repository](https://huggingface.co/datasets/imageomics/sentinel-beetles/)) has `relative_img_loc`s linking to the specimen images. Each record (row) is metadata for a single specimen image. The training dataset will include all the fields described in the schema below. The validation and challenge (test) datasets will only include `eventID` (anonymized), `domainID` (anonymized), `scientificName`, and `relative_img_loc`.
 
-<<We can update this as appropriate if we are going to add metadata about the image, like image quality flags etc. Also, I'm unclear on whether we're going to provide a download of the image files to participants, or just give them a table with image_uris>>
+See [Data Fields](#data-fields), below, or the [dataset](https://huggingface.co/datasets/imageomics/sentinel-beetles/), itself, for more information on these terms.
+
 
 ### Data Fields
 | fieldName | description | dataType | relatedTerms |
