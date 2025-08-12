@@ -19,22 +19,7 @@ All data are licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/
 
 ## Instructions to Download Training Data
 
-
 The challenge training data is available on Hugging Face, from [imageomics/sentinel-beetles](https://huggingface.co/datasets/imageomics/sentinel-beetles). Please follow the directions provided in the dataset card to access the data, and open a [discussion](https://huggingface.co/datasets/imageomics/sentinel-beetles/discussions) if you encounter any issues. Note that the data will not be made available until the official launch of the challenge.
-
-First, install the downloader in your virtual environment:
-```bash
-pip install git+https://github.com/Imageomics/cautious-robot
-```
-Then download <<link to training data csv>> and run: 
-```bash
-cautious-robot -i <path/to/beetle_ml_train.csv> -o <path/to/images> -s hybrid_stat -v md5
-```
-
-This will create subfolders ...
-<<are we going to provide a download of the images, or just a metadata file with image URIs?>>
-
-
 
 
 ## Additional Information About the CSV File
