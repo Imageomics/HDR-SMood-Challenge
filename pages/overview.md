@@ -25,7 +25,7 @@ Participants are tasked with predicting the Standardized Precipitation Evapotran
 The training data comprises images from beetle specimens and a metadata file that indicates the location and date each specimen was collected, its scientific name, and the values of the three SPEI metrics at the sampling location on the collection date. 
 
 ### Test data
-Test data will include images of beetle specimens and limited metadata. The metadata file will indicate an anonymized sampling `eventId` associated with each specimen, along with the specimen's scientific name and the eco-climatic domain of the collection site (but not the site ID or location). The collection date and the SPEI values will not be provided in the test dataset.
+Test data will include images of beetle specimens and limited metadata. The metadata file will indicate an anonymized sampling `eventId` associated with each specimen, along with the specimen's scientific name and the anonymized eco-climatic domain of the collection site (but not the site ID or location). The collection date and the SPEI values will not be provided in the test dataset.
 
 ## Timeline
 
