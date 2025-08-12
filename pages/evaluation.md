@@ -18,11 +18,16 @@ This test data set comprises:
 ### Data Fields in the Metadata Table
 | fieldName | description | dataType | relatedTerms |
 |---|---|---|---|
-| event_id | An (anonymized) identifier for the set of information associated with the event, which includes information about the place and time of the event | string | [DWC_v2009-04-24:eventID](http://rs.tdwg.org/dwc/terms/history/index.htm#eventID-2009-04-24)
-| domain_id | Unique identifier of the NEON domain | string | [DWC_v2009-04-24:locationID](http://rs.tdwg.org/dwc/terms/history/index.htm#locationID-2009-04-24)
-| scientific_name | Scientific name, associated with the taxonID. This is the name of the lowest level taxonomic rank that can be determined | string | [DWC_v2009-04-24:scientificName](http://tdwg.github.io/dwc/terms/history/index.htm#scientificName-2009-09-21)
-| image_id | Unique identifier for image | string  | |
-| image_uri | Location of image media resource (link to image) | string | |
+| eventID | An (anonymized) identifier for the set of information associated with the event, which includes information about the place and time of the event | string | [DWC_v2009-04-24:eventID](http://rs.tdwg.org/dwc/terms/history/index.htm#eventID-2009-04-24)
+| domainID | Unique identifier (anonymized) of the NEON domain | string | [DWC_v2009-04-24:locationID](http://rs.tdwg.org/dwc/terms/history/index.htm#locationID-2009-04-24)
+| scientificName | Scientific name, associated with the taxonID. This is the name of the lowest level taxonomic rank that can be determined | string | [DWC_v2009-04-24:scientificName](http://tdwg.github.io/dwc/terms/history/index.htm#scientificName-2009-09-21)
+| public_id | Unique identifier for image | string  | |
+| relative_img_loc | Beetle image location within the beetle images folder (flattened_images) | string | |
+| colorpicker_path | Color card image location within the color card and scale images folder (color_and_scale_images) | string | |
+| scalebar_path | Scale image location within the color card and scale images folder (color_and_scale_images) | string | |
+| SPEI_30d | Target variable: SPEI calculated over a short timescale (1 month), reflecting short-term moisture conditions. | real | |
+| SPEI_1y | Target variable: SPEI calculated over a medium timescale (1 year), reflecting seasonal precipitation patterns. | real | |
+| SPEI_2y | Target variable: SPEI calculated over a long timescale (2 years), reflecting long-term hydrological conditions. | real | |
 
 ## Evaluation Phases
 There are 2 phases. Each test data set is split into a development set and a final test set (the challenge dataset).  
