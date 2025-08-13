@@ -60,10 +60,6 @@ def install_from_whitelist(req_file, program_dir):
         else:
             exit(f"{package_version[0]} is not an allowed package. Please contact the organizers on GitHub to request acceptance of the package.")
 
-def is_image_extension(path):
-    image_extensions = {'.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.webp'}
-    return os.path.splitext(path)[-1].lower() in image_extensions
-
 def process_prediction(prediction, event_id):
     """
     Check if the score is valid.
