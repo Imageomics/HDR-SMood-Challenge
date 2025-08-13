@@ -15,7 +15,38 @@ All data are licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/
 - `SPEI_1y` is the drought condition calculated from the year preceding sample collection.
 - `SPEI_2y` is the drought condition calculated from the two years preceding sample collection.
 
-**The submission file** will be a long-format flat table (csv file format) with a prediction for each `SPEI_30d`, `SPEI_1y`, and `SPEI_2y` for each `eventID`. Predictions will include a measure of uncertainty, so each prediction will include `mu` (mean) and `sigma` (standard deviation). See the example submission below for more details. 
+**The submission file** will be a zip file containing the model weights, `model.py`, and `requirements.txt`. The `model.py` should contain a `Model` class with the methods `load` (to setup and load the model) and `predict` that takes a list of Python dictionaries as input. The list of dictionaries contains information for a single collection event. The dictionaries will contain the following keys:
+
+`relative_img`: the `PIL.Image` of the beetle
+
+`colorpicker_img`: the `PIL.Image` of the color calibration card
+
+`scalebar_img`: the `PIL.Image` of the scalebar
+
+`scientificName`: the scientific name of the give beetle
+
+`domainID`: the domain ID (anonymized) where the beetle was collected
+
+The `predict` method should return a dictionary containing keys for each `SPEI_30d`, `SPEI_1y`, and `SPEI_2y`. Predictions will include a measure of uncertainty, so each prediction will include `mu` (mean) and `sigma` (standard deviation). The output will look like:
+```
+{
+    "SPEI_30d": {
+        "mu" : 1.2,
+        "sigma" : 0.1,
+    },
+    "SPEI_1y": {
+        "mu" : -0.3,
+        "sigma" : 0.7,
+    },
+    "SPEI_2y": {
+        "mu" : 2.2,
+        "sigma" : 0.3,
+    },
+}
+```
+
+
+See the example submissions at https://github.com/Imageomics/HDR-SMood-Challenge-sample for more details. 
 
 ## Instructions to Download Training Data
 
