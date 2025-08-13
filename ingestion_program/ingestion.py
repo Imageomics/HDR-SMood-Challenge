@@ -60,6 +60,10 @@ def install_from_whitelist(req_file, program_dir):
         else:
             exit(f"{package_version[0]} is not an allowed package. Please contact the organizers on GitHub to request acceptance of the package.")
 
+def is_image_extension(path):
+    image_extensions = {'.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.webp'}
+    return os.path.splitext(path)[-1].lower() in image_extensions
+
 def process_prediction(prediction, event_id):
     """
     Check if the score is valid.
@@ -133,7 +137,7 @@ if __name__ == "__main__":
         print(f"model running on device: {submit_model.device}")
     
     # Load metadata
-    metadata = pd.read_csv(os.path.join(input_dir, "input_metadata.csv"), dtype={"image_filename": str, "species": str})
+    metadata = pd.read_csv(os.path.join(input_dir, "input.csv"), dtype={"relative_img_loc": str, "colorpicker_path": str, "scalebar_path": str, "scientificName": str, "domainID": int, "eventID": int})
     # Group metadata by event_id
     grouped_metadata = metadata.groupby('eventID')
     with open(os.path.join(output_dir, "predictions.csv"), mode='w', newline='') as file:
@@ -143,14 +147,14 @@ if __name__ == "__main__":
         for event_id, group in tqdm(grouped_metadata, total=len(grouped_metadata)):
             event = []
             for row in group.itertuples(index=False):
-                filename = row.image_filename
-                species = row.species
-                image_path = os.path.join(input_dir, filename)
-                if os.path.isdir(image_path):
-                    continue
-                img = Image.open(image_path)
-                # input for predict function of model: [{'img':PIL Image object, 'species': species scientific name str},...]
-                event.append({'img':img, 'species': species})
+                relative_img_filepath = os.path.join(input_dir, row.relative_img_loc)
+                relative_img = Image.open(relative_img_filepath)
+                colorpicker_img_filepath = os.path.join(input_dir, row.colorpicker_path)
+                colorpicker_img = Image.open(colorpicker_img_filepath)
+                scalebar_img_filepath = os.path.join(input_dir, row.scalebar_path)
+                scalebar_img = Image.open(scalebar_img_filepath)
+                # 'domainID','scientificName','relative_img_loc','colorpicker_path','scalebar_path'
+                event.append({'relative_img':relative_img, 'colorpicker_img': colorpicker_img, 'scalebar_img': scalebar_img, 'scientificName': row.scientificName, 'domainID':row.domainID})
             prediction = submit_model.predict(event)
             pred_output = process_prediction(prediction, event_id)
             writer.writerows(pred_output)
