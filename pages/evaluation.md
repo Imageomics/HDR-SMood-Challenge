@@ -66,7 +66,7 @@ There are 2 phases. Each test data set is split into a development set and a fin
 	* The provided training data contains:
 		- Images of carabid beetle specimens from various species, collection sites, and dates.
 		- A metadata CSV including SPEI values corresponding with each of the `eventId`s in the training dataset. 
-	* The goal is to develop an algorithm to predict each of the three SPEI values for an `eventId` given the images of beetles collected during that sampling event.
+	* The goal is to develop an algorithm to predict each of the three SPEI values for an `eventID` given the images of beetles collected during that sampling event.
 	* Upload your model: feedback will be provided on the development set until the end of the challenge; one submission is allowed per day.
 		1. CRPS values (see below for more details) will be returned for all predictions (you can calculate the scores yourself, but we will provide a scoring dashboard as well) 
 	* Participants may submit _one_ score on the development sets to be displayed on the leaderboard. This score can be removed and replaced with a newer or better score as they choose.
@@ -79,7 +79,7 @@ There are 2 phases. Each test data set is split into a development set and a fin
 
 This competition allows you to submit your developed algorithm, which will be run on the development and the final test dataset through CodaBench.
 
-Your algorithm needs to generate three SPEI predictions (`spei_30d`, `spei_1y`, and `spei_2y`) for each `event_id` when given a collection of images of specimens collected during a given sampling `event_id`. 
+Your algorithm needs to generate three SPEI predictions (`spei_30d`, `spei_1y`, and `spei_2y`) for each `event_id` when given a collection of images of specimens collected during a given sampling `eventID`. 
 
 Each prediction will be scored using the continuous rank probability score (CRPS), which provides a metric to evaluate both the accuracy and precision of a prediction when compared against an observed datapoint ([Gneiting and Raftery 2007](https://doi.org/10.1198/016214506000001437)). Here we use the convention where 0 is the best possible score, and CRPS values increase as prediction accuracy and precision decrease. This approach has been used successfully in forecasting challenges like the [NEON Ecological Forecasting Challenge](https://projects.ecoforecast.org/neon4cast-ci/) organized by the [Ecological Forecasting Initiative (EFI)](https://ecoforecast.org/) (see the documentation [here](https://projects.ecoforecast.org/neon4cast-docs/Evaluation.html)). Submissions to this challenge will be scored using the [`score4cast` R package](https://github.com/eco4cast/score4cast) developed by EFI. 
 
