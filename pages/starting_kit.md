@@ -11,7 +11,10 @@ See the provided [baselines](https://github.com/Imageomics/HDR-SMood-challenge/t
 
 ### Common Error
 
-[!!] Do not zip the whole folder. ONLY select the `model.py` and relevant weight and requirements files to make the tarball.
+<div style="background-color: #ffcccc; border-left: 5px solid #ff0000; padding: 10px;">
+<strong>CAUTION:</strong>
+Do not zip the whole folder. ONLY select the `model.py` and relevant weight and requirements files to make the tarball.
+</div> 
 
 <img src="https://github.com/user-attachments/assets/10b49a84-d42a-42c2-8855-e4b563b28b15" alt="common_error: no module named model" width="750">
 
