@@ -67,7 +67,7 @@ There are 2 phases. Each test data set is split into a development set and a fin
 		- Images of carabid beetle specimens from various species, collection sites, and dates.
 		- A metadata CSV including SPEI values corresponding with each of the `eventId`s in the training dataset. 
 	* The goal is to develop an algorithm to predict each of the three SPEI values for an `eventID` given the images of beetles collected during that sampling event.
-	* Upload your model: feedback will be provided on the development set until the end of the challenge; one submission is allowed per day.
+	* Upload your model: feedback will be provided on the development set until the end of the challenge; up to five submissions are allowed per day.
 	* Participants may submit _one_ score on the development sets to be displayed on the leaderboard. This score can be removed and replaced with a newer or better score as they choose.
 2. **Final phase:**
 	* This phase will start automatically at the end of the challenge.
