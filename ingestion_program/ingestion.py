@@ -32,12 +32,12 @@ import subprocess
 import time
 from datetime import datetime, timezone
 from packaging.version import Version, InvalidVersion
-
+import pandas as pd
+import csv
 
 def install_from_whitelist(req_file, program_dir):
     whitelist = open(os.path.join(program_dir,"whitelist.txt"), 'r').readlines()
     whitelist = [i.rstrip('\n') for i in whitelist]
-    # print(whitelist)
 
     for package in open(req_file, 'r').readlines():
         package = package.rstrip('\n')
@@ -52,11 +52,7 @@ def install_from_whitelist(req_file, program_dir):
                  Version(version_str)
             except InvalidVersion:
                  exit(f"requested package {package} has invalid version, please check that {version_str} is the correct version of {package_version[0]}.")
-            #     package = package_version[0]
 
-                
-        #print("accepted package name: ", package)
-        #print("package name ", package_version[0])
         if package_version[0] in whitelist:
             # package must be in whitelist, so format check unnecessary
             subprocess.check_call([executable, "-m", "pip", "install", package])
@@ -64,6 +60,30 @@ def install_from_whitelist(req_file, program_dir):
         else:
             exit(f"{package_version[0]} is not an allowed package. Please contact the organizers on GitHub to request acceptance of the package.")
 
+def process_prediction(prediction, event_id):
+    """
+    Check if the score is valid.
+    If the score is not valid, throw exception and exit; else return the formatted score.
+    """
+    VAR_KEYS = {'SPEI_30d', 'SPEI_1y', 'SPEI_2y'}
+    PARAM_KEYS = {'mu', 'sigma'}
+    if isinstance(prediction, dict) and len(prediction) == len(VAR_KEYS) and VAR_KEYS == prediction.keys():
+        pred_output = []
+        for var in VAR_KEYS:
+            param_pred = prediction[var]
+            if isinstance(param_pred, dict) and len(param_pred) == len(PARAM_KEYS) and PARAM_KEYS == param_pred.keys():
+                for param in PARAM_KEYS:
+                    if isinstance(param_pred[param], float):
+                        final_pred = round(param_pred[param], 4)
+                        pred_output.append([event_id, var, param, final_pred])
+                    else:
+                        exit(f"Invalid prediction format. Prediction values should be floats.")
+            else:
+                exit(f"Invalid prediction format. Mean and std keys for each SPEI should be {PARAM_KEYS}.")
+        return pred_output
+    else:
+        exit(f"Invalid prediction format. SPEI keys should be {VAR_KEYS}.")
+    
 
 if __name__ == "__main__":
     
@@ -74,7 +94,7 @@ if __name__ == "__main__":
     # Print the timestamp in UTC
     print("Current UTC Time:", current_time_utc.strftime('%Y-%m-%d %H:%M:%S'))
 
-    #### INPUT/OUTPUT: Get input and output directory names
+    ### INPUT/OUTPUT: Get input and output directory names
     input_dir = os.path.abspath(argv[1])
     output_dir = os.path.abspath(argv[2])
     program_dir = os.path.abspath(argv[3])
@@ -101,6 +121,7 @@ if __name__ == "__main__":
     # Import remaining packages
     from PIL import Image
     from tqdm import tqdm
+
     from model import Model
     
 
@@ -110,32 +131,31 @@ if __name__ == "__main__":
 
     if hasattr(submit_model, "device"):
         print(f"model running on device: {submit_model.device}")
-
-    img_list = os.listdir(input_dir)
-    num_of_datapoint = len(img_list)
-
-    with open(os.path.join(output_dir, "predictions.txt"), 'w') as f:
-        print("predictions file opened")
+    
+    # Load metadata
+    metadata = pd.read_csv(os.path.join(input_dir, "input.csv"), dtype={"relative_img_loc": str, "colorpicker_path": str, "scalebar_path": str, "scientificName": str, "domainID": int, "eventID": int})
+    # Group metadata by event_id
+    grouped_metadata = metadata.groupby('eventID')
+    with open(os.path.join(output_dir, "predictions.csv"), mode='w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(["eventID","variable","parameter","prediction"])
         start = time.time()
-        for idx, filename in tqdm(enumerate(img_list), total=num_of_datapoint):
-            try:
-                image_path = os.path.join(input_dir, filename)
-                if os.path.isdir(image_path):
-                    continue
-                datapoint = Image.open(image_path)
-            except Exception as e:
-                print(f"{image_path}: {e}")
-                continue
-            
-            score = submit_model.predict(datapoint)
+        for event_id, group in tqdm(grouped_metadata, total=len(grouped_metadata)):
+            event = []
+            for row in group.itertuples(index=False):
+                relative_img_filepath = os.path.join(input_dir, row.relative_img_loc)
+                relative_img = Image.open(relative_img_filepath)
+                colorpicker_img_filepath = os.path.join(input_dir, row.colorpicker_path)
+                colorpicker_img = Image.open(colorpicker_img_filepath)
+                scalebar_img_filepath = os.path.join(input_dir, row.scalebar_path)
+                scalebar_img = Image.open(scalebar_img_filepath)
+                # 'domainID','scientificName','relative_img_loc','colorpicker_path','scalebar_path'
+                event.append({'relative_img':relative_img, 'colorpicker_img': colorpicker_img, 'scalebar_img': scalebar_img, 'scientificName': row.scientificName, 'domainID':row.domainID})
+            prediction = submit_model.predict(event)
+            pred_output = process_prediction(prediction, event_id)
+            writer.writerows(pred_output)
 
-            if idx ==  num_of_datapoint - 1:
-                f.write(filename + "," + str(round(score, 4)))
-            else:
-                f.write(filename + "," + str(round(score, 4)) + '\n')
         end = time.time()
         elapsed = time.strftime("%H:%M:%S", time.gmtime(end - start))
 
         print(f"model inference takes {elapsed}.")
-
-        print(f"we looped {idx} times")       
