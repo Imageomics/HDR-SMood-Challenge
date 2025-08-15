@@ -39,7 +39,6 @@ reference_data/
 scoring_program/
     metadata.yaml
     score.R
-    score_combined.py
 ```
 
 ### Notes on Structure
