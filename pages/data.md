@@ -23,9 +23,9 @@ All data are licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/
 
 `scalebar_img`: the `PIL.Image` of the scalebar
 
-`scientificName`: the scientific name of the give beetle
+`scientificName`: (str) the scientific name of the give beetle
 
-`domainID`: the domain ID (anonymized) where the beetle was collected
+`domainID`: (int) the domain ID (anonymized) where the beetle was collected
 
 The `predict` method should return a dictionary containing keys for each `SPEI_30d`, `SPEI_1y`, and `SPEI_2y`. Predictions will include a measure of uncertainty, so each prediction will include `mu` (mean) and `sigma` (standard deviation). The output will look like:
 ```

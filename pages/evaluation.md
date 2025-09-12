@@ -16,9 +16,9 @@ This challenge will provide insight about how well carabid beetles can serve as 
 
 `scalebar_img`: the `PIL.Image` of the scalebar
 
-`scientificName`: the scientific name of the give beetle
+`scientificName`: (str) the scientific name of the give beetle
 
-`domainID`: the domain ID (anonymized) where the beetle was collected
+`domainID`: (int) the domain ID (anonymized) where the beetle was collected
 
 The `predict` method should return a dictionary containing keys for each `SPEI_30d`, `SPEI_1y`, and `SPEI_2y`. Predictions will include a measure of uncertainty, so each prediction will include `mu` (mean) and `sigma` (standard deviation). The output will look like:
 ```
@@ -82,5 +82,5 @@ Your algorithm needs to generate three SPEI predictions (`spei_30d`, `spei_1y`, 
 
 Each prediction will be scored using the continuous rank probability score (CRPS), which provides a metric to evaluate both the accuracy and precision of a prediction when compared against an observed datapoint ([Gneiting and Raftery 2007](https://doi.org/10.1198/016214506000001437)). Here we use the convention where 0 is the best possible score, and CRPS values increase as prediction accuracy and precision decrease. This approach has been used successfully in forecasting challenges like the [NEON Ecological Forecasting Challenge](https://projects.ecoforecast.org/neon4cast-ci/) organized by the [Ecological Forecasting Initiative (EFI)](https://ecoforecast.org/) (see the documentation [here](https://projects.ecoforecast.org/neon4cast-docs/Evaluation.html)). Submissions to this challenge will be scored using the [`score4cast` R package](https://github.com/eco4cast/score4cast) developed by EFI. 
 
-The CRPS values for a submission will be averaged across `eventId`s to produce an overall score, where the winning submission will have the lowest overall score. For the challenge, we will also post a leaderboard with sub-categories for each SPEI time scale (30 days, 1 year, 2 years). There will also be an extra-challenging "novel eco-domain" category, where beetle images and metadata from sampling events from an eco-domain that was not included in the training dataset will be provided as input as a true out-of-sample challenge. 
+We use Root Mean Square (RMS) of six categories as the primary score, where the winning submission will have the lowest RMS score. For the challenge, we will also post a leaderboard with sub-categories for each SPEI time scale (30 days, 1 year, 2 years). There will also be an extra-challenging "novel eco-domain" category, where beetle images and metadata from sampling events from an eco-domain that was not included in the training dataset will be provided as input as a true out-of-sample challenge. 
 
