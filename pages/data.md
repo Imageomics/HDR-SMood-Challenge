@@ -8,7 +8,7 @@ All data are licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/
 
 ## General Overview of Inputs and Expected Outputs
 
-**Model inputs** will be a flat metadata table (CSV format) where each row is a metadata record for a specimen image. Multiple images will be associated with a sampling `eventID`, where a "sampling event" corresponds with a location (NEON Site ID) and the date on which the beetle specimens were collected. Thus, multiple input records (multiple images of beetle specimens) will be used to predict a single SPEI value at a given site on a given date. Note that `eventID`s will be anonymized in the test dataset, but the metadata will include `siteID` and `collectDate` in the training data. 
+**Model inputs** will be a flat metadata table (CSV format) where each row is a metadata record for a specimen image. Multiple images will be associated with a sampling `eventID`, where a "sampling event" corresponds with a location (NEON Site ID) and the date on which the beetle specimens were collected. Thus, multiple input records (multiple images of beetle specimens) will be used to predict a single SPEI value at a given site on a given date. Note that `eventID`'s will be anonymized in the test dataset, but the metadata will include `siteID` and `collectDate` in the training data. 
 
 **What to predict:** The SPEI metrics represent cumulative drought conditions over a time window. For this challenge, participants will submit predictions for SPEI metrics representing three different time scales: 
 - `SPEI_30d` is the drought condition calculated from data for the 30 day window preceding sample collection.
@@ -55,7 +55,7 @@ The challenge training data is available on Hugging Face, from [imageomics/senti
 
 ## Additional Information About the CSV File
 
-The CSV metadata file (included in the [Hugging Face repository](https://huggingface.co/datasets/imageomics/sentinel-beetles/)) has `relative_img_loc`s linking to the specimen images. Each record (row) is metadata for a single specimen image. The training dataset will include all the fields described in the schema below. The validation and challenge (test) datasets will only include `eventID` (anonymized), `domainID` (anonymized), `scientificName`, and `relative_img_loc`.
+The CSV metadata file (included in the [Hugging Face repository](https://huggingface.co/datasets/imageomics/sentinel-beetles/)) has `relative_img_loc`'s linking to the specimen images. Each record (row) is metadata for a single specimen image. The training dataset will include all the fields described in the schema below. The validation and challenge (test) datasets will only include `eventID` (anonymized), `domainID` (anonymized), `scientificName`, and `relative_img_loc`.
 
 See [Data Fields](#data-fields), below, or the [dataset](https://huggingface.co/datasets/imageomics/sentinel-beetles/), itself, for more information on these terms.
 
@@ -63,9 +63,9 @@ See [Data Fields](#data-fields), below, or the [dataset](https://huggingface.co/
 ### Data Fields
 | fieldName | description | dataType | relatedTerms |
 |---|---|---|---|
-| eventID | An (anonymized) identifier for the set of information associated with the event, which includes information about the place and time of the event | string | [DWC_v2009-04-24:eventID](http://rs.tdwg.org/dwc/terms/history/index.htm#eventID-2009-04-24)
+| eventID | An (anonymized) identifier for the set of information associated with the event, which includes information about the place and time of the event | integer | [DWC_v2009-04-24:eventID](http://rs.tdwg.org/dwc/terms/history/index.htm#eventID-2009-04-24)
 | collectDate | Date of the collection event | dateTime | [DWC_v2009-04-24:eventDate](http://rs.tdwg.org/dwc/terms/history/index.htm#eventDate-2009-04-24)
-| domainID | Unique identifier (anonymized) of the NEON domain | string | [DWC_v2009-04-24:locationID](http://rs.tdwg.org/dwc/terms/history/index.htm#locationID-2009-04-24)
+| domainID | Unique identifier (anonymized) of the NEON domain | integer | [DWC_v2009-04-24:locationID](http://rs.tdwg.org/dwc/terms/history/index.htm#locationID-2009-04-24)
 | siteID | NEON site code (anonymized) | string | [DWC_v2009-04-24:locationID](http://rs.tdwg.org/dwc/terms/history/index.htm#locationID-2009-04-24)
 | scientificName | Scientific name, associated with the taxonID. This is the name of the lowest level taxonomic rank that can be determined | string | [DWC_v2009-04-24:scientificName](http://tdwg.github.io/dwc/terms/history/index.htm#scientificName-2009-09-21)
 | public_id | Unique identifier for image | string  | |
