@@ -1,6 +1,6 @@
 # Beetles as Sentinel Taxa Challenge: Rules
 
-Submissions must be made before the end of phase 1. You may make 5 submissions every day of the challenge; the last submission will be used to determine the winner.
+Submissions must be made before the end of phase 1. You may make up to 10 submissions each day of the challenge; the last submission will be used to determine the winner.
 
 This challenge is governed by the [HDR ML Challenge Terms and Conditions](https://www.nsfhdr.org/mlchallenge-y2).
 
