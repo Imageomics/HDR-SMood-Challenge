@@ -29,7 +29,7 @@ Test data will include images of beetle specimens and limited metadata. The meta
 
 ## Timeline
 
-This ML Challenge starts on August 13, 2025, and will run through October 31, 2025. Be sure to resubmit your preferred model from the development phase by October 31, 2025 at 11:59pm [AOE](https://www.timeanddate.com/time/zones/aoe); it will then be run on the final test sets. Only one submission will be run against the test sets to determine your final score in the challenge.
+This ML Challenge starts on September 18, 2025, and will run through January 15, 2026. Be sure to resubmit your preferred model from the development phase by 11:59pm [AOE](https://www.timeanddate.com/time/zones/aoe); it will then be run on the final test sets. Only one submission will be run against the test sets to determine your final score in the challenge.
 
 
 This challenge was generated based on the [Imageomics/HDR-anomaly-challenge](https://github.com/Imageomics/HDR-anomaly-challenge), which used the [CodaBench Iris Sample Bundle](https://github.com/codalab/competition-examples/tree/master/codabench/iris/bundle); full formatting and challenge design process can be found in the [challenge repo on GitHub](https://github.com/Imageomics/HDR-SMood-Challenge).
